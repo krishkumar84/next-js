@@ -5,15 +5,15 @@ import { Suspense } from "react";
 import { getPost } from "@/lib/data";
 
 // FETCH DATA WITH AN API
-// const getData = async (slug: any) => {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+const getData = async (slug: any) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
 
-//   if (!res.ok) {
-//      throw new Error("Something went wrong");
-//   }
+  if (!res.ok) {
+     throw new Error("Something went wrong");
+  }
 
-//    return res.json();
-//  };
+   return res.json();
+ };
 
 
 const SinglePostPage = async ({params}) => {
@@ -21,7 +21,9 @@ const SinglePostPage = async ({params}) => {
   //const post = await getData(slug);
   const post = await getPost(slug);
 
- // console.log(post.createdAt)
+ //console.log(post.createdAt.toString())
+
+ 
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -49,7 +51,7 @@ const SinglePostPage = async ({params}) => {
 
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
-            <span className={styles.detailValue}>{post.createdAt}</span>
+            <span className={styles.detailValue}>{post.createdAt.toString().slice(4,16)}</span>
           </div>
         </div>
         <div className={styles.content}>

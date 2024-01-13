@@ -6,8 +6,9 @@ import Link from 'next/link';
 import NavLink from './navLink/navLink';
 import { render } from "react-dom";
 import Image from "next/image";
+import { handleLogout } from "@/lib/action";
 
-function Links() {
+function Links({session}) {
     const links = [
         {
           title: "Homepage",
@@ -27,7 +28,7 @@ function Links() {
         },
       ];
 
-      const session = true;
+      // const session = true;
       const isAdmin = true;
 
       const [open, setOpen] = useState(false);
@@ -38,11 +39,12 @@ function Links() {
       { links.map((link=>(
         <NavLink item={link} key={link.title} />
       )))
-      }{session ? (
+      }{session?.user ? (
         <>
-          {isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
-       
+          {session.user?.isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
+            <form action={handleLogout}>
             <button className="bg-white px-5 py-2.5 rounded-2xl text-black">Logout</button>
+            </form>
        
         </>
       ) : (
