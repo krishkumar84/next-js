@@ -23,15 +23,15 @@ function ContactPage() {
           <textarea
             name=""
             id=""
-            cols="30"
-            rows="10"
+            cols={30}
+            rows={10}
             placeholder="Message"
           ></textarea>
           <button>Send</button>
         </form>
       </div>
     </div>
-  )
+  );
 }
 
 export default ContactPage

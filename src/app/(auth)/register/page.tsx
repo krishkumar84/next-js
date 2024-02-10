@@ -1,4 +1,3 @@
-import { register } from "@/lib/action";
 import styles from "./register.module.css";
 import RegisterForm from "@/components/registrationForm/registerForm";
 

@@ -16,7 +16,7 @@ const getData = async (slug: any) => {
  };
 
 
-const SinglePostPage = async ({params}) => {
+const SinglePostPage = async (params: any) => {
   const {slug} = params;
   //const post = await getData(slug);
   const post = await getPost(slug);
