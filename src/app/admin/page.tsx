@@ -19,7 +19,7 @@ const AdminPage = async () => {
           </Suspense>
         </div>
         <div className={styles.col}>
-          <AdminPostForm userId = {session.user.id} />
+        {session && session.user && <AdminPostForm userId={session.user.id as any} />}
         </div>
       </div>
       <div className={styles.row}>
