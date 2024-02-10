@@ -5,7 +5,8 @@ import NavLink from './navLink/navLink';
 import Image from "next/image";
 import { handleLogout } from "@/lib/action";
 
-function Links({session}) {
+
+function Links(session: any) {
     const links = [
         {
           title: "Homepage",

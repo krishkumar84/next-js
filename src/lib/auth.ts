@@ -8,7 +8,7 @@ import { authConfig } from "./auth.config";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 
-const login = async (credentials) => {
+const login = async (credentials : any) => {
   try {
     connectToDb();
     const user = await User.findOne({ username: credentials.username });
@@ -58,12 +58,12 @@ export const {
       }),
   ],callbacks: {
     async signIn({ user, account, profile }) {
-      if (account.provider === "github") {
+      if (account && account.provider === "github") {
         connectToDb();
         try {
-          const user = await User.findOne({ email: profile.email });
+          const user = await User.findOne({ email: profile ? profile.email : undefined});
 
-          if (!user) {
+          if (profile && !user) {
             const newUser = new User({
               username: profile.login,
               email: profile.email,
@@ -76,8 +76,8 @@ export const {
           console.log(err);
           return false;
         }
-      }else if(account.provider === "google"){
-        if (profile.email_verified && profile.email.endsWith("@gmail.com")) {
+      }else if(account && account.provider === "google"){
+        if (profile && profile.email_verified &&  profile.email?.endsWith("@gmail.com")) {
             connectToDb();
             try {
               const user = await User.findOne({ email: profile.email });

@@ -6,7 +6,7 @@ import { signIn, signOut } from "./auth";
 import { User } from "./models";
 import bcrypt from "bcryptjs";
 
-export const addPost = async (prevState, formData) => {
+export const addPost = async (prevState : any , formData : any) => {
   if (!formData) {
     console.error("formData is undefined");
     return; // or handle the error accordingly
@@ -41,7 +41,7 @@ export const addPost = async (prevState, formData) => {
 }
 
 
-export const deletePost = async (formData) => {
+export const deletePost = async (formData : any) => {
     
     // const title = formData.get("title");
     // const desc = formData.get("desc");
@@ -62,7 +62,7 @@ export const deletePost = async (formData) => {
     }
 }
 
-export const addUser = async (prevState,formData) => {
+export const addUser = async (prevState: any,formData: any) => {
   const { username, email, password, img } = Object.fromEntries(formData);
 
   try {
@@ -84,7 +84,7 @@ export const addUser = async (prevState,formData) => {
 };
 
 
-export const deleteUser = async (formData) => {
+export const deleteUser = async (formData: any) => {
   const { id } = Object.fromEntries(formData);
 
   try {
@@ -101,7 +101,7 @@ export const deleteUser = async (formData) => {
 };
 
 
-export const register = async (previousState ,formData) => {
+export const register = async (previousState: any ,formData: any) => {
     const { username, email, password, img, passwordRepeat } =
       Object.fromEntries(formData);
   
@@ -141,7 +141,7 @@ export const register = async (previousState ,formData) => {
 
 
 
-  export const login = async (prevState, formData) => {
+  export const login = async (prevState: any, formData: any) => {
     const { username, password } = Object.fromEntries(formData);
   
     try {
@@ -151,7 +151,7 @@ export const register = async (previousState ,formData) => {
     } catch (err) {
       console.log(err);
   
-      if (err.message.includes("CredentialsSignin")) {
+      if (err instanceof Error && err.message.includes("CredentialsSignin")) {
         return { error: "Invalid username or password" };
       }
    throw err;
